@@ -7,10 +7,10 @@ path="res://.import/tower.png-9bfe1b384cbccc869df365f771f24df2.stex"
 [deps]
 
 source_file="res://textures/tower.png"
-source_md5="10149c7314de34ea7a0b97d16e7f6b18"
+source_md5="b378adcffdd5cadb62a802343ed518c5"
 
 dest_files=[ "res://.import/tower.png-9bfe1b384cbccc869df365f771f24df2.stex" ]
-dest_md5="cde5ee1130b9e19cb358acf6d09e527e"
+dest_md5="3e89476eee86f8b20ece8aa6c87fa2d4"
 
 [params]
 

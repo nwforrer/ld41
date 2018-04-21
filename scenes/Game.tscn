@@ -1,29 +1,32 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/Game.gd" type="Script" id=1]
 [ext_resource path="res://textures/bg.png" type="Texture" id=2]
 [ext_resource path="res://scenes/Base.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Mob.tscn" type="PackedScene" id=4]
+[ext_resource path="res://music/song1.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/AudioStreamPlayer.gd" type="Script" id=6]
+[ext_resource path="res://scenes/Car.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Curve2D" id=1]
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 75.5, 66, 0, 0, 0, 0, 102.5, 145, 0, 0, 0, 0, 136.5, 205, 0, 0, 0, 0, 176.5, 277, 0, 0, 0, 0, 213.5, 340, 0, 0, 0, 0, 256.5, 397, 0, 0, 0, 0, 331.5, 461, 0, 0, 0, 0, 416.5, 507, 0, 0, 0, 0, 506.5, 539, 0, 0, 0, 0, 630.5, 563, 0, 0, 0, 0, 765.5, 573, 0, 0, 0, 0, 876.5, 571 )
+"points": PoolVector2Array( 0, 0, 0, 0, 32.5, 33.5, 0, 0, 0, 0, 98.5, 238.5, 0, 0, 0, 0, 188.5, 363.5, 0, 0, 0, 0, 299.5, 448.5, 0, 0, 0, 0, 446.5, 511.5, 0, 0, 0, 0, 632.5, 534.5, 0, 0, 0, 0, 745.5, 529.5, 0, 0, 0, 0, 871.5, 547.5 )
 }
 
 [sub_resource type="Curve2D" id=2]
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 78.5, 67.5, 0, 0, 0, 0, 888.5, 506.5 )
+"points": PoolVector2Array( 0, 0, 0, 0, 44.5, 28.5, 0, 0, 0, 0, 764.5, 484.5, 0, 0, 0, 0, 878.5, 533.5 )
 }
 
 [sub_resource type="Curve2D" id=3]
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 76.5, 67.5, 0, 0, 0, 0, 214.5, 54.5, 0, 0, 0, 0, 295.5, 50.5, 0, 0, 0, 0, 405.5, 61.5, 0, 0, 0, 0, 495.5, 81.5, 0, 0, 0, 0, 566.5, 113.5, 0, 0, 0, 0, 642.5, 161.5, 0, 0, 0, 0, 801.5, 292.5, 0, 0, 0, 0, 937.5, 476.5 )
+"points": PoolVector2Array( 0, 0, 0, 0, 52.5, 17.5, 0, 0, 0, 0, 363.5, 32.5, 0, 0, 0, 0, 587.5, 167.5, 0, 0, 0, 0, 816.5, 418.5, 0, 0, 0, 0, 891.5, 491.5 )
 }
 
 [node name="Game" type="Node" index="0"]
@@ -46,8 +49,8 @@ curve = SubResource( 1 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="bottom path" index="0"]
 
-position = Vector2( 75.5, 66 )
-rotation = 1.24147
+position = Vector2( 32.5, 33.5 )
+rotation = 1.25932
 offset = 0.0
 h_offset = 0.0
 v_offset = 0.0
@@ -58,7 +61,7 @@ lookahead = 4.0
 
 [node name="Mob" parent="bottom path/PathFollow2D" index="0" instance=ExtResource( 4 )]
 
-position = Vector2( -60.5212, 38.1904 )
+position = Vector2( -4.29966, 0.6119 )
 
 [node name="middle path" type="Path2D" parent="." index="3"]
 
@@ -66,6 +69,8 @@ curve = SubResource( 2 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="middle path" index="0"]
 
+position = Vector2( 44.5, 28.5 )
+rotation = 0.564569
 offset = 0.0
 h_offset = 0.0
 v_offset = 0.0
@@ -82,6 +87,8 @@ curve = SubResource( 3 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="top path" index="0"]
 
+position = Vector2( 52.5, 17.5 )
+rotation = 0.0481943
 offset = 0.0
 h_offset = 0.0
 v_offset = 0.0
@@ -91,5 +98,43 @@ loop = true
 lookahead = 4.0
 
 [node name="Mob" parent="top path/PathFollow2D" index="0" instance=ExtResource( 4 )]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="5"]
+
+stream = ExtResource( 5 )
+volume_db = -17.27
+autoplay = true
+mix_target = 0
+bus = "Master"
+script = ExtResource( 6 )
+
+[node name="Car" parent="." index="6" instance=ExtResource( 7 )]
+
+position = Vector2( 950, 421 )
+
+[node name="Camera2D" type="Camera2D" parent="Car" index="0"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = false
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
 
 
