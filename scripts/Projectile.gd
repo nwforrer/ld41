@@ -11,14 +11,20 @@ func spawn(initial_velocity):
 func _physics_process(delta):
 	var collision_info = move_and_collide(direction*speed*delta)
 	if collision_info:
-		print('collided:', collision_info.collider.get_name())
 		var collider = collision_info.collider
 		var collider_layers = collision_info.collider.collision_layer
+		# if it's a mob, grab the parent, because the collision object is not the root
+		var object_collision
 		if collider_layers & MOB_BIT:
-			collider.get_parent().queue_free()
+			object_collision = collider.get_parent()
+		elif collider_layers & collision_mask:
+			object_collision = collider
 		
+		if object_collision and object_collision.has_method("projectile_hit"):
+			object_collision.projectile_hit()
+		
+		$ProjectileHit.play()
 		queue_free()
 
-	
 func _on_LifeTimer_timeout():
 	queue_free()

@@ -1,14 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/Projectile.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Projectile.gd" type="Script" id=1]
 [ext_resource path="res://textures/projectile.png" type="Texture" id=2]
+[ext_resource path="res://music/hit.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 16.9373
 
-[node name="Projectile" type="KinematicBody2D" index="0"]
+[node name="Projectile" type="KinematicBody2D"]
 
 input_pickable = true
 collision_layer = 16
@@ -32,6 +33,14 @@ process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = true
+
+[node name="ProjectileHit" type="AudioStreamPlayer" parent="." index="3"]
+
+stream = ExtResource( 3 )
+volume_db = 0.0
+autoplay = false
+mix_target = 0
+bus = "Master"
 
 [connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]
 

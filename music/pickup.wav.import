@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pickup.wav-b28f1cf1e4942c3396b598b3580bfdf4.sample"
+
+[deps]
+
+source_file="res://music/pickup.wav"
+source_md5="86b0da248d42170cd26442dafdb7a875"
+
+dest_files=[ "res://.import/pickup.wav-b28f1cf1e4942c3396b598b3580bfdf4.sample" ]
+dest_md5="dbe55f379fd09ca48bdc04cd835afdca"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
