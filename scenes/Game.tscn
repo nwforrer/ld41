@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/Game.gd" type="Script" id=1]
 [ext_resource path="res://textures/bg.png" type="Texture" id=2]
-[ext_resource path="res://scenes/Base.tscn" type="PackedScene" id=3]
-[ext_resource path="res://music/song1.wav" type="AudioStream" id=4]
-[ext_resource path="res://scenes/AudioStreamPlayer.gd" type="Script" id=5]
-[ext_resource path="res://scenes/Car.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/Camera2D.gd" type="Script" id=7]
+[ext_resource path="res://scenes/RaceTrack.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Base.tscn" type="PackedScene" id=4]
+[ext_resource path="res://music/song1.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/AudioStreamPlayer.gd" type="Script" id=6]
+[ext_resource path="res://scenes/Car.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Camera2D.gd" type="Script" id=8]
+[ext_resource path="res://scenes/Tower.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Curve2D" id=1]
 
@@ -29,7 +31,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 52.5, 17.5, 0, 0, 0, 0, 363.5, 32.5, 0, 0, 0, 0, 587.5, 167.5, 0, 0, 0, 0, 816.5, 418.5, 0, 0, 0, 0, 891.5, 491.5 )
 }
 
-[node name="Game" type="Node" index="0"]
+[node name="Game" type="Node"]
 
 script = ExtResource( 1 )
 paths = [ NodePath("bottom path"), NodePath("middle path"), NodePath("top path") ]
@@ -37,7 +39,7 @@ paths = [ NodePath("bottom path"), NodePath("middle path"), NodePath("top path")
 [node name="MobSpawnTimer" type="Timer" parent="." index="0"]
 
 process_mode = 1
-wait_time = 1.0
+wait_time = 5.0
 one_shot = false
 autostart = true
 
@@ -47,42 +49,46 @@ texture = ExtResource( 2 )
 centered = false
 _sections_unfolded = [ "Offset" ]
 
-[node name="Base" parent="." index="2" instance=ExtResource( 3 )]
+[node name="RaceTrack" parent="." index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 1023.82, 0 )
+
+[node name="Base" parent="." index="3" instance=ExtResource( 4 )]
 
 position = Vector2( 947, 526 )
 
-[node name="bottom path" type="Path2D" parent="." index="3"]
+[node name="bottom path" type="Path2D" parent="." index="4"]
 
 curve = SubResource( 1 )
 
-[node name="middle path" type="Path2D" parent="." index="4"]
+[node name="middle path" type="Path2D" parent="." index="5"]
 
 curve = SubResource( 2 )
 
-[node name="top path" type="Path2D" parent="." index="5"]
+[node name="top path" type="Path2D" parent="." index="6"]
 
 curve = SubResource( 3 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="7"]
 
-stream = ExtResource( 4 )
+stream = ExtResource( 5 )
 volume_db = -17.27
 autoplay = true
 mix_target = 0
 bus = "Master"
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
-[node name="Car" parent="." index="7" instance=ExtResource( 6 )]
+[node name="Car" parent="." index="8" instance=ExtResource( 7 )]
 
-position = Vector2( 950, 421 )
+position = Vector2( 971.712, 284.045 )
 speed = 300
-rotation_speed = 3.0
+rotation_speed = 4.0
 
 [node name="Camera2D" type="Camera2D" parent="Car" index="0"]
 
 anchor_mode = 1
 rotating = false
-current = false
+current = true
 zoom = Vector2( 1, 1 )
 limit_left = -10000000
 limit_top = -10000000
@@ -102,7 +108,23 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 7 )
+script = ExtResource( 8 )
+
+[node name="Tower" parent="." index="9" instance=ExtResource( 9 )]
+
+position = Vector2( 317.335, 536.128 )
+
+[node name="Tower2" parent="." index="10" instance=ExtResource( 9 )]
+
+position = Vector2( 215.453, 252.197 )
+
+[node name="Tower3" parent="." index="11" instance=ExtResource( 9 )]
+
+position = Vector2( 342.387, 111.902 )
+
+[node name="Tower4" parent="." index="12" instance=ExtResource( 9 )]
+
+position = Vector2( 751.582, 207.103 )
 
 [connection signal="timeout" from="MobSpawnTimer" to="." method="_on_MobSpawnTimer_timeout"]
 
