@@ -1,4 +1,4 @@
-extends Sprite
+extends PathFollow2D
 
 func _process(delta):
-	get_parent().set_offset(get_parent().get_offset() + (50*delta))
+	set_offset(get_offset() + (50*delta))
