@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/base.png-dc477f1aa2114b223eee6854e2a63931.stex"
+path="res://.import/DirtGrassTopRight.png-2067ea0a0ab150bd0c3ec38e4ee04b9e.stex"
 
 [deps]
 
-source_file="res://textures/base.png"
-source_md5="dca1df1eca68f95149100653651e6461"
+source_file="res://textures/DirtGrassTopRight.png"
+source_md5="cffc245f55339dd91ebb6d2ee29af12d"
 
-dest_files=[ "res://.import/base.png-dc477f1aa2114b223eee6854e2a63931.stex" ]
-dest_md5="bfe73bd9cf781f5b7fc1905fe1442701"
+dest_files=[ "res://.import/DirtGrassTopRight.png-2067ea0a0ab150bd0c3ec38e4ee04b9e.stex" ]
+dest_md5="414374d0120839011a79e113f82df10d"
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/race_track.png-2a89dbfddbf765f6465303f3804a81b7.stex"
+path="res://.import/Base.png-8ae3a975a0b657e0bbb32e8ee627fbd7.stex"
 
 [deps]
 
-source_file="res://textures/race_track.png"
-source_md5="3a0da84a9cccc0295977567918c02e58"
+source_file="res://textures/Base.png"
+source_md5="a2a56de206bafa8e32c9b355f0a1b4c1"
 
-dest_files=[ "res://.import/race_track.png-2a89dbfddbf765f6465303f3804a81b7.stex" ]
-dest_md5="79daa8918d2ccb0af05d895a082a8142"
+dest_files=[ "res://.import/Base.png-8ae3a975a0b657e0bbb32e8ee627fbd7.stex" ]
+dest_md5="fc783da7e2ca4309a08210e8a935cae5"
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=9 format=2]
+[gd_resource type="TileSet" load_steps=10 format=2]
 
 [ext_resource path="res://textures/Dirt.png" type="Texture" id=1]
 [ext_resource path="res://textures/Grass.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://textures/DirtGrassLeft.png" type="Texture" id=6]
 [ext_resource path="res://textures/DirtGrassTopLeft.png" type="Texture" id=7]
 [ext_resource path="res://textures/DirtGrassRight.png" type="Texture" id=8]
+[ext_resource path="res://textures/DirtGrassTopRight.png" type="Texture" id=9]
 
 [resource]
 
@@ -83,4 +84,13 @@
 7/occluder_offset = Vector2( 0, 0 )
 7/navigation_offset = Vector2( 0, 0 )
 7/shapes = [  ]
+8/name = "DirtGrassTopRight"
+8/texture = ExtResource( 9 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 0, 0, 32, 32 )
+8/is_autotile = false
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shapes = [  ]
 

@@ -18,21 +18,21 @@
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 32.5, 33.5, 0, 0, 0, 0, 163.77, 194.961, 0, 0, 0, 0, 291.194, 315.737, 0, 0, 0, 0, 390.917, 422.108, 0, 0, 0, 0, 492.856, 488.59, 0, 0, 0, 0, 632.5, 534.5, 0, 0, 0, 0, 745.5, 529.5, 0, 0, 0, 0, 871.5, 547.5 )
+"points": PoolVector2Array( 0, 0, 0, 0, 32.5, 33.5, 0, 0, 0, 0, 179.742, 191.422, 0, 0, 0, 0, 299.237, 309.044, 0, 0, 0, 0, 415.427, 416.908, 0, 0, 0, 0, 492.856, 488.59, 0, 0, 0, 0, 563.005, 541.721, 0, 0, 0, 0, 750.782, 541.207, 0, 0, 0, 0, 849.902, 521.689 )
 }
 
 [sub_resource type="Curve2D" id=2]
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 44.5, 28.5, 0, 0, 0, 0, 168.202, 55.349, 0, 0, 0, 0, 521.687, 387.709, 0, 0, 0, 0, 633.671, 440.724, 0, 0, 0, 0, 865.325, 521.351 )
+"points": PoolVector2Array( 0, 0, 0, 0, 168.202, 55.349, 0, 0, 0, 0, 521.687, 387.709, 0, 0, 0, 0, 606.447, 453.524, 0, 0, 0, 0, 747.184, 456.959, 0, 0, 0, 0, 833.918, 501.611 )
 }
 
 [sub_resource type="Curve2D" id=3]
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 52.5, 17.5, 0, 0, 0, 0, 358.784, 45.3767, 0, 0, 0, 0, 466.263, 158.396, 0, 0, 0, 0, 788.701, 449.809, 0, 0, 0, 0, 891.5, 491.5 )
+"points": PoolVector2Array( 0, 0, 0, 0, 358.784, 45.3767, 0, 0, 0, 0, 466.263, 158.396, 0, 0, 0, 0, 788.701, 449.809, 0, 0, 0, 0, 861.12, 486.746 )
 }
 
 [node name="Game" type="Node"]
@@ -74,16 +74,20 @@ position = Vector2( 1022.32, 109.009 )
 
 [node name="bottom path" type="Path2D" parent="." index="5"]
 
+position = Vector2( -76.0795, -90.7123 )
+scale = Vector2( 1.0873, 1.16568 )
 curve = SubResource( 1 )
 
 [node name="middle path" type="Path2D" parent="." index="6"]
 
-position = Vector2( -0.411259, -0.0918465 )
-scale = Vector2( 1.00924, 1.00322 )
+position = Vector2( -76.8747, -113.211 )
+scale = Vector2( 1.0976, 1.22019 )
 curve = SubResource( 2 )
 
 [node name="top path" type="Path2D" parent="." index="7"]
 
+position = Vector2( -138.556, -110.207 )
+scale = Vector2( 1.15542, 1.22423 )
 curve = SubResource( 3 )
 
 [node name="Tower" parent="." index="8" instance=ExtResource( 4 )]
@@ -104,7 +108,7 @@ position = Vector2( 509.5, 277.199 )
 
 [node name="Base" parent="." index="12" instance=ExtResource( 5 )]
 
-position = Vector2( 947, 526 )
+position = Vector2( 858.387, 494.866 )
 health = 2
 
 [node name="Car" parent="." index="13" instance=ExtResource( 6 )]
@@ -119,10 +123,10 @@ anchor_mode = 1
 rotating = false
 current = true
 zoom = Vector2( 1, 1 )
-limit_left = -10000000
-limit_top = -10000000
-limit_right = 10000000
-limit_bottom = 10000000
+limit_left = 0
+limit_top = 0
+limit_right = 2200
+limit_bottom = 1000
 limit_smoothed = false
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
@@ -138,6 +142,7 @@ editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
 script = ExtResource( 7 )
+_sections_unfolded = [ "Editor", "Limit" ]
 
 [node name="Music" type="AudioStreamPlayer" parent="." index="14"]
 

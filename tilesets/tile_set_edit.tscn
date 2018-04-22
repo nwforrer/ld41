@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://textures/Dirt.png" type="Texture" id=1]
 [ext_resource path="res://textures/Grass.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://textures/DirtGrassTopLeft.png" type="Texture" id=6]
 [ext_resource path="res://textures/DirtGrassLeft.png" type="Texture" id=7]
 [ext_resource path="res://textures/DirtGrassRight.png" type="Texture" id=8]
+[ext_resource path="res://textures/DirtGrassTopRight.png" type="Texture" id=9]
 
 [node name="Node" type="Node"]
 
@@ -63,6 +64,13 @@ centered = false
 
 position = Vector2( 160, 96 )
 texture = ExtResource( 8 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="DirtGrassTopRight" type="Sprite" parent="." index="8"]
+
+position = Vector2( 224, 96 )
+texture = ExtResource( 9 )
 centered = false
 _sections_unfolded = [ "Offset" ]
 
