@@ -12,6 +12,8 @@ func _process(delta):
 		projectile.connect("projectile_hit", get_parent(), "on_projectile_hit")
 		add_child(projectile)
 		
+		$Shot.play()
+		
 		$FireTimer.start()
 		can_fire = false
 

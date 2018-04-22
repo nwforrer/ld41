@@ -1,16 +1,18 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/RaceTrack.tscn" type="PackedScene" id=2]
 [ext_resource path="res://textures/bg.png" type="Texture" id=3]
-[ext_resource path="res://scenes/Base.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Tower.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Tower.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Base.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Car.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/Camera2D.gd" type="Script" id=7]
 [ext_resource path="res://music/song1.wav" type="AudioStream" id=8]
 [ext_resource path="res://scripts/AudioStreamPlayer.gd" type="Script" id=9]
 [ext_resource path="res://music/hit.wav" type="AudioStream" id=10]
-[ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=11]
+[ext_resource path="res://music/pickup.wav" type="AudioStream" id=11]
+[ext_resource path="res://music/fail.wav" type="AudioStream" id=12]
+[ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Curve2D" id=1]
 
@@ -33,13 +35,14 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 52.5, 17.5, 0, 0, 0, 0, 363.5, 32.5, 0, 0, 0, 0, 587.5, 167.5, 0, 0, 0, 0, 816.5, 418.5, 0, 0, 0, 0, 891.5, 491.5 )
 }
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node" index="0"]
 
 script = ExtResource( 1 )
 paths = [ NodePath("bottom path"), NodePath("middle path"), NodePath("top path") ]
-mob_health_boost = 5
+mob_health_boost = 4
 mob_speed_boost = 75
-mob_spawn_boost = null
+mob_spawn_boost = 2
+resources_to_spawn = 3
 
 [node name="MobSpawnTimer" type="Timer" parent="." index="0"]
 
@@ -72,38 +75,38 @@ texture = ExtResource( 3 )
 centered = false
 _sections_unfolded = [ "Offset" ]
 
-[node name="Base" parent="." index="5" instance=ExtResource( 4 )]
-
-position = Vector2( 947, 526 )
-health = 2
-
-[node name="bottom path" type="Path2D" parent="." index="6"]
+[node name="bottom path" type="Path2D" parent="." index="5"]
 
 curve = SubResource( 1 )
 
-[node name="middle path" type="Path2D" parent="." index="7"]
+[node name="middle path" type="Path2D" parent="." index="6"]
 
 curve = SubResource( 2 )
 
-[node name="top path" type="Path2D" parent="." index="8"]
+[node name="top path" type="Path2D" parent="." index="7"]
 
 curve = SubResource( 3 )
 
-[node name="Tower" parent="." index="9" instance=ExtResource( 5 )]
+[node name="Tower" parent="." index="8" instance=ExtResource( 4 )]
 
-position = Vector2( 317.335, 536.128 )
+position = Vector2( 462.04, 432.122 )
 
-[node name="Tower2" parent="." index="10" instance=ExtResource( 5 )]
+[node name="Tower2" parent="." index="9" instance=ExtResource( 4 )]
 
 position = Vector2( 215.453, 252.197 )
 
-[node name="Tower3" parent="." index="11" instance=ExtResource( 5 )]
+[node name="Tower3" parent="." index="10" instance=ExtResource( 4 )]
 
 position = Vector2( 342.387, 111.902 )
 
-[node name="Tower4" parent="." index="12" instance=ExtResource( 5 )]
+[node name="Tower4" parent="." index="11" instance=ExtResource( 4 )]
 
-position = Vector2( 751.582, 207.103 )
+position = Vector2( 594.819, 296.036 )
+
+[node name="Base" parent="." index="12" instance=ExtResource( 5 )]
+
+position = Vector2( 947, 526 )
+health = 2
 
 [node name="Car" parent="." index="13" instance=ExtResource( 6 )]
 
@@ -154,7 +157,23 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="GUI" parent="." index="16" instance=ExtResource( 11 )]
+[node name="ResourcePickup" type="AudioStreamPlayer" parent="." index="16"]
+
+stream = ExtResource( 11 )
+volume_db = -15.62
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="Missed" type="AudioStreamPlayer" parent="." index="17"]
+
+stream = ExtResource( 12 )
+volume_db = -10.67
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="GUI" parent="." index="18" instance=ExtResource( 13 )]
 
 [connection signal="resources_updated" from="." to="GUI" method="_on_Game_resources_updated"]
 
