@@ -2,8 +2,8 @@ extends KinematicBody2D
 
 signal resource_collected
 
-export (int) var speed = 200
-export (float) var rotation_speed = 1.5
+export (int) var speed = 300
+export (float) var rotation_speed = 3
 
 const PICKUP_BIT = 32
 

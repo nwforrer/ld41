@@ -1,12 +1,18 @@
 extends StaticBody2D
 
 signal tower_selected
+signal tower_unselected
 
 const MOB_BIT = 1
+const PLAYER_BIT = 4
 
 var active_bodies = []
 var can_fire = false
 var is_upgraded = false
+var is_highlighted = false
+
+func _ready():
+	$ArrowSprite.hide()
 
 func _process(delta):
 	if can_fire and active_bodies.size() > 0:
@@ -39,13 +45,6 @@ func spawn_upgrade_sprite():
 	health_sprite.name = str(get_name(), "HealthSprite")
 	add_child(health_sprite)
 
-func _input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton \
-	and event.button_index == BUTTON_LEFT \
-	and event.pressed:
-		print('upgrading tower:', name)
-		emit_signal('tower_selected', self)
-
 func _on_FireTimer_timeout():
 	$FireTimer.stop()
 	can_fire = true
@@ -58,3 +57,16 @@ func _on_Area2D_body_exited(body):
 	var body_index = active_bodies.find(body)
 	if body_index >= 0:
 		active_bodies.remove(body_index)
+
+
+func _on_PlayerSelectRange_body_entered(body):
+	if not is_highlighted and body.collision_layer & PLAYER_BIT:
+		emit_signal("tower_selected", self)
+		$ArrowSprite.show()
+		is_highlighted = true
+
+func _on_PlayerSelectRange_body_exited(body):
+	if is_highlighted and body.collision_layer & PLAYER_BIT:
+		emit_signal("tower_unselected", self)
+		$ArrowSprite.hide()
+		is_highlighted = false

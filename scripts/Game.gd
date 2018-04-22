@@ -18,6 +18,8 @@ export (int) var resources_needed = 5
 var available_mob_powerups = ['health', 'spawn', 'speed']
 var current_mob_powerups = []
 
+var selected_tower
+
 # powerups?
 # health
 # shooting
@@ -36,11 +38,16 @@ func _ready():
 	$RaceStartTimer.start()
 
 func _process(delta):
+	get_input()
 	if not $RaceStartTimer.is_stopped() and $RaceStartTimer.time_left <= 5:
 		$GUI.countdown($RaceStartTimer.time_left)
 	elif not $RaceStopTimer.is_stopped() and $RaceStopTimer.time_left <= 5:
 		$GUI.countdown($RaceStopTimer.time_left)
 
+func get_input():
+	if Input.is_action_pressed('ui_interact'):
+		upgrade_selected_tower()
+	
 func _on_MobSpawnTimer_timeout():
 	if paths.size() > 0:
 		var path = paths[randi()%paths.size()]
@@ -96,10 +103,17 @@ func _on_Base_base_destroyed():
 	
 func on_projectile_hit():
 	$ProjectileHit.play()
-	
-func _on_tower_selected(tower):
-	if resources_held >= resources_needed:
-		if tower.upgrade():
+
+func upgrade_selected_tower():
+	if selected_tower and resources_held >= resources_needed:
+		if selected_tower.upgrade():
 			resources_held -= resources_needed
 			resources_needed *= 2
 			emit_signal("resources_updated", resources_held, resources_needed)
+			$Powerup.play()
+	
+func _on_tower_selected(tower):
+	selected_tower = tower
+
+func _on_Tower_tower_unselected():
+	selected_tower = null

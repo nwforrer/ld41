@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Tower.gd" type="Script" id=1]
 [ext_resource path="res://textures/Tower.png" type="Texture" id=2]
 [ext_resource path="res://music/shoot.wav" type="AudioStream" id=3]
+[ext_resource path="res://textures/Arrow.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -13,6 +14,11 @@ radius = 171.103
 
 custom_solver_bias = 0.0
 radius = 33.0534
+
+[sub_resource type="CircleShape2D" id=3]
+
+custom_solver_bias = 0.0
+radius = 65.799
 
 [node name="Tower" type="StaticBody2D"]
 
@@ -30,8 +36,9 @@ _sections_unfolded = [ "Collision" ]
 
 texture = ExtResource( 2 )
 
-[node name="Area2D" type="Area2D" parent="." index="1"]
+[node name="FireRange" type="Area2D" parent="." index="1"]
 
+visible = false
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -39,8 +46,9 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FireRange" index="0"]
 
 shape = SubResource( 1 )
 
@@ -61,12 +69,40 @@ bus = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
 
+visible = false
 shape = SubResource( 2 )
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[node name="PlayerSelectRange" type="Area2D" parent="." index="5"]
 
-[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 2
+collision_mask = 4
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSelectRange" index="0"]
+
+shape = SubResource( 3 )
+
+[node name="ArrowSprite" type="Sprite" parent="." index="6"]
+
+position = Vector2( 0, -44.0939 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Visibility" ]
+
+[connection signal="body_entered" from="FireRange" to="." method="_on_Area2D_body_entered"]
+
+[connection signal="body_exited" from="FireRange" to="." method="_on_Area2D_body_exited"]
 
 [connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]
+
+[connection signal="body_entered" from="PlayerSelectRange" to="." method="_on_PlayerSelectRange_body_entered"]
+
+[connection signal="body_exited" from="PlayerSelectRange" to="." method="_on_PlayerSelectRange_body_exited"]
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/DefenseTileMap.tscn" type="PackedScene" id=2]
@@ -12,7 +12,8 @@
 [ext_resource path="res://music/hit.wav" type="AudioStream" id=10]
 [ext_resource path="res://music/pickup.wav" type="AudioStream" id=11]
 [ext_resource path="res://music/fail.wav" type="AudioStream" id=12]
-[ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=13]
+[ext_resource path="res://music/powerup.wav" type="AudioStream" id=13]
+[ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Curve2D" id=1]
 
@@ -35,7 +36,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 358.784, 45.3767, 0, 0, 0, 0, 466.263, 158.396, 0, 0, 0, 0, 788.701, 449.809, 0, 0, 0, 0, 861.12, 486.746 )
 }
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node" index="0"]
 
 script = ExtResource( 1 )
 paths = [ NodePath("bottom path"), NodePath("middle path"), NodePath("top path") ]
@@ -114,8 +115,7 @@ health = 2
 [node name="Car" parent="." index="13" instance=ExtResource( 6 )]
 
 position = Vector2( 971.712, 284.045 )
-speed = 300
-rotation_speed = 4.0
+rotation_speed = 7.0
 
 [node name="Camera2D" type="Camera2D" parent="Car" index="0"]
 
@@ -177,7 +177,15 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="GUI" parent="." index="18" instance=ExtResource( 13 )]
+[node name="Powerup" type="AudioStreamPlayer" parent="." index="18"]
+
+stream = ExtResource( 13 )
+volume_db = -15.62
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="GUI" parent="." index="19" instance=ExtResource( 14 )]
 
 [connection signal="resources_updated" from="." to="GUI" method="_on_Game_resources_updated"]
 
@@ -189,11 +197,19 @@ bus = "Master"
 
 [connection signal="tower_selected" from="Tower" to="." method="_on_tower_selected"]
 
+[connection signal="tower_unselected" from="Tower" to="." method="_on_Tower_tower_unselected"]
+
 [connection signal="tower_selected" from="Tower2" to="." method="_on_tower_selected"]
+
+[connection signal="tower_unselected" from="Tower2" to="." method="_on_Tower_tower_unselected"]
 
 [connection signal="tower_selected" from="Tower3" to="." method="_on_tower_selected"]
 
+[connection signal="tower_unselected" from="Tower3" to="." method="_on_Tower_tower_unselected"]
+
 [connection signal="tower_selected" from="Tower4" to="." method="_on_tower_selected"]
+
+[connection signal="tower_unselected" from="Tower4" to="." method="_on_Tower_tower_unselected"]
 
 [connection signal="base_destroyed" from="Base" to="." method="_on_Base_base_destroyed"]
 
