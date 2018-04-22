@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal projectile_hit
+
 export (int) var speed
 var direction
 
@@ -23,7 +25,7 @@ func _physics_process(delta):
 		if object_collision and object_collision.has_method("projectile_hit"):
 			object_collision.projectile_hit()
 		
-		$ProjectileHit.play()
+		emit_signal("projectile_hit")
 		queue_free()
 
 func _on_LifeTimer_timeout():

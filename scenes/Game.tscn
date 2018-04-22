@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/RaceTrack.tscn" type="PackedScene" id=2]
@@ -9,7 +9,8 @@
 [ext_resource path="res://scripts/Camera2D.gd" type="Script" id=7]
 [ext_resource path="res://music/song1.wav" type="AudioStream" id=8]
 [ext_resource path="res://scripts/AudioStreamPlayer.gd" type="Script" id=9]
-[ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=10]
+[ext_resource path="res://music/hit.wav" type="AudioStream" id=10]
+[ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Curve2D" id=1]
 
@@ -32,10 +33,13 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 52.5, 17.5, 0, 0, 0, 0, 363.5, 32.5, 0, 0, 0, 0, 587.5, 167.5, 0, 0, 0, 0, 816.5, 418.5, 0, 0, 0, 0, 891.5, 491.5 )
 }
 
-[node name="Game" type="Node" index="0"]
+[node name="Game" type="Node"]
 
 script = ExtResource( 1 )
 paths = [ NodePath("bottom path"), NodePath("middle path"), NodePath("top path") ]
+mob_health_boost = 5
+mob_speed_boost = 75
+mob_spawn_boost = null
 
 [node name="MobSpawnTimer" type="Timer" parent="." index="0"]
 
@@ -142,7 +146,17 @@ mix_target = 0
 bus = "Master"
 script = ExtResource( 9 )
 
-[node name="GUI" parent="." index="15" instance=ExtResource( 10 )]
+[node name="ProjectileHit" type="AudioStreamPlayer" parent="." index="15"]
+
+stream = ExtResource( 10 )
+volume_db = -12.32
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="GUI" parent="." index="16" instance=ExtResource( 11 )]
+
+[connection signal="resources_updated" from="." to="GUI" method="_on_Game_resources_updated"]
 
 [connection signal="timeout" from="MobSpawnTimer" to="." method="_on_MobSpawnTimer_timeout"]
 
