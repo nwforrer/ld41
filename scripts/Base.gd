@@ -14,7 +14,7 @@ func spawn_health_sprites():
 	for health_index in health:
 		var health_sprite = Sprite.new()
 		health_sprite.texture = health_texture
-		health_sprite.position.y = position.y - $Sprite.texture.get_height()/2 - (10 + 2*health_index * health_texture.get_height())
+		health_sprite.position.y = -$Sprite.texture.get_height()/2 - 5 - (2*health_index*health_texture.get_height())
 		health_sprite.name = str("BaseHealthSprite",health_index)
 		add_child(health_sprite)
 

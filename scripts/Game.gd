@@ -12,6 +12,8 @@ export (int) var resources_to_spawn
 
 var resources_available
 var resources_collected
+var resources_held
+export (int) var resources_needed = 5
 
 var available_mob_powerups = ['health', 'spawn', 'speed']
 var current_mob_powerups = []
@@ -27,6 +29,9 @@ func _ready():
 	
 	resources_available = 0
 	resources_collected = 0
+	resources_held = 0
+	
+	emit_signal("resources_updated", resources_held, resources_needed)
 	
 	$RaceStartTimer.start()
 
@@ -52,7 +57,7 @@ func _on_RaceStartTimer_timeout():
 	$RaceTrack.spawn_pickups(resources_to_spawn)
 	resources_available += resources_to_spawn
 	
-	emit_signal("resources_updated", resources_collected, resources_available)
+	emit_signal("resources_updated", resources_held, resources_needed)
 
 func _on_RaceStopTimer_timeout():
 	var uncollected_resources = resources_available - resources_collected
@@ -76,12 +81,13 @@ func _on_RaceStopTimer_timeout():
 	
 	resources_to_spawn += 1
 	
-	emit_signal("resources_updated", resources_collected, resources_available)
+	emit_signal("resources_updated", resources_held, resources_needed)
 
 func _on_Car_resource_collected(resource):
 	resources_collected += 1
+	resources_held += 1
 	$ResourcePickup.play()
-	emit_signal("resources_updated", resources_collected, resources_available)
+	emit_signal("resources_updated", resources_held, resources_needed)
 	resource.queue_free()
 
 func _on_Base_base_destroyed():
@@ -90,3 +96,10 @@ func _on_Base_base_destroyed():
 	
 func on_projectile_hit():
 	$ProjectileHit.play()
+	
+func _on_tower_selected(tower):
+	if resources_held >= resources_needed:
+		if tower.upgrade():
+			resources_held -= resources_needed
+			resources_needed *= 2
+			emit_signal("resources_updated", resources_held, resources_needed)

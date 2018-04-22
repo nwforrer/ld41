@@ -43,6 +43,7 @@ mob_health_boost = 4
 mob_speed_boost = 75
 mob_spawn_boost = 2
 resources_to_spawn = 3
+resources_needed = 5
 
 [node name="MobSpawnTimer" type="Timer" parent="." index="0"]
 
@@ -182,6 +183,14 @@ bus = "Master"
 [connection signal="timeout" from="RaceStartTimer" to="." method="_on_RaceStartTimer_timeout"]
 
 [connection signal="timeout" from="RaceStopTimer" to="." method="_on_RaceStopTimer_timeout"]
+
+[connection signal="tower_selected" from="Tower" to="." method="_on_tower_selected"]
+
+[connection signal="tower_selected" from="Tower2" to="." method="_on_tower_selected"]
+
+[connection signal="tower_selected" from="Tower3" to="." method="_on_tower_selected"]
+
+[connection signal="tower_selected" from="Tower4" to="." method="_on_tower_selected"]
 
 [connection signal="base_destroyed" from="Base" to="." method="_on_Base_base_destroyed"]
 

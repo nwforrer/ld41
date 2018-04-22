@@ -5,11 +5,11 @@ var mob_boosts = []
 func _ready():
 	set_resources_text(0, 0)
 
-func _on_Game_resources_updated(resources_collected, resources_available):
-	set_resources_text(resources_collected, resources_available)
+func _on_Game_resources_updated(resources_collected, resources_needed):
+	set_resources_text(resources_collected, resources_needed)
 
-func set_resources_text(resources_collected, resources_available):
-	$ResourcesLabel.text = str("Resources ", resources_collected, " / ", resources_available)
+func set_resources_text(resources_collected, resources_needed):
+	$ResourcesLabel.text = str("Resources ", resources_collected, " / ", resources_needed)
 	
 func add_mob_boost(boost):
 	var label = Label.new()
