@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/car.png-2b189d0a2a6dac96bd0faa10a80e32cc.stex"
+path="res://.import/Mob.png-b96025606a3328f7751e7b8cd0de6827.stex"
 
 [deps]
 
-source_file="res://textures/car.png"
-source_md5="b56f83c58348deae22cf8707725013a2"
+source_file="res://textures/Mob.png"
+source_md5="a4ad0d7e894b6e9bdb925f50fc05f679"
 
-dest_files=[ "res://.import/car.png-2b189d0a2a6dac96bd0faa10a80e32cc.stex" ]
-dest_md5="8662cdc0225053b4e1b6687cab067623"
+dest_files=[ "res://.import/Mob.png-b96025606a3328f7751e7b8cd0de6827.stex" ]
+dest_md5="e623dbd1cb6ea9d34401750da492612c"
 
 [params]
 

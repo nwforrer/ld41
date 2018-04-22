@@ -1,8 +1,8 @@
 [gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
-[ext_resource path="res://scenes/RaceTrack.tscn" type="PackedScene" id=2]
-[ext_resource path="res://textures/bg.png" type="Texture" id=3]
+[ext_resource path="res://scenes/DefenseTileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/RaceTrack.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Tower.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Base.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Car.tscn" type="PackedScene" id=6]
@@ -18,24 +18,24 @@
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 32.5, 33.5, 0, 0, 0, 0, 98.5, 238.5, 0, 0, 0, 0, 188.5, 363.5, 0, 0, 0, 0, 299.5, 448.5, 0, 0, 0, 0, 446.5, 511.5, 0, 0, 0, 0, 632.5, 534.5, 0, 0, 0, 0, 745.5, 529.5, 0, 0, 0, 0, 871.5, 547.5 )
+"points": PoolVector2Array( 0, 0, 0, 0, 32.5, 33.5, 0, 0, 0, 0, 163.77, 194.961, 0, 0, 0, 0, 291.194, 315.737, 0, 0, 0, 0, 390.917, 422.108, 0, 0, 0, 0, 492.856, 488.59, 0, 0, 0, 0, 632.5, 534.5, 0, 0, 0, 0, 745.5, 529.5, 0, 0, 0, 0, 871.5, 547.5 )
 }
 
 [sub_resource type="Curve2D" id=2]
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 44.5, 28.5, 0, 0, 0, 0, 764.5, 484.5, 0, 0, 0, 0, 878.5, 533.5 )
+"points": PoolVector2Array( 0, 0, 0, 0, 44.5, 28.5, 0, 0, 0, 0, 168.202, 55.349, 0, 0, 0, 0, 521.687, 387.709, 0, 0, 0, 0, 633.671, 440.724, 0, 0, 0, 0, 865.325, 521.351 )
 }
 
 [sub_resource type="Curve2D" id=3]
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 52.5, 17.5, 0, 0, 0, 0, 363.5, 32.5, 0, 0, 0, 0, 587.5, 167.5, 0, 0, 0, 0, 816.5, 418.5, 0, 0, 0, 0, 891.5, 491.5 )
+"points": PoolVector2Array( 0, 0, 0, 0, 52.5, 17.5, 0, 0, 0, 0, 358.784, 45.3767, 0, 0, 0, 0, 466.263, 158.396, 0, 0, 0, 0, 788.701, 449.809, 0, 0, 0, 0, 891.5, 491.5 )
 }
 
-[node name="Game" type="Node" index="0"]
+[node name="Game" type="Node"]
 
 script = ExtResource( 1 )
 paths = [ NodePath("bottom path"), NodePath("middle path"), NodePath("top path") ]
@@ -66,15 +66,11 @@ wait_time = 10.0
 one_shot = true
 autostart = false
 
-[node name="RaceTrack" parent="." index="3" instance=ExtResource( 2 )]
+[node name="DefenseTileMap" parent="." index="3" instance=ExtResource( 2 )]
 
-position = Vector2( 1021.64, 1.36038 )
+[node name="RaceTrack" parent="." index="4" instance=ExtResource( 3 )]
 
-[node name="Background" type="Sprite" parent="." index="4"]
-
-texture = ExtResource( 3 )
-centered = false
-_sections_unfolded = [ "Offset" ]
+position = Vector2( 1022.32, 109.009 )
 
 [node name="bottom path" type="Path2D" parent="." index="5"]
 
@@ -82,6 +78,8 @@ curve = SubResource( 1 )
 
 [node name="middle path" type="Path2D" parent="." index="6"]
 
+position = Vector2( -0.411259, -0.0918465 )
+scale = Vector2( 1.00924, 1.00322 )
 curve = SubResource( 2 )
 
 [node name="top path" type="Path2D" parent="." index="7"]
@@ -90,19 +88,19 @@ curve = SubResource( 3 )
 
 [node name="Tower" parent="." index="8" instance=ExtResource( 4 )]
 
-position = Vector2( 462.04, 432.122 )
+position = Vector2( 320.212, 443.202 )
 
 [node name="Tower2" parent="." index="9" instance=ExtResource( 4 )]
 
-position = Vector2( 215.453, 252.197 )
+position = Vector2( 164.484, 304.275 )
 
 [node name="Tower3" parent="." index="10" instance=ExtResource( 4 )]
 
-position = Vector2( 342.387, 111.902 )
+position = Vector2( 333.523, 107.47 )
 
 [node name="Tower4" parent="." index="11" instance=ExtResource( 4 )]
 
-position = Vector2( 594.819, 296.036 )
+position = Vector2( 509.5, 277.199 )
 
 [node name="Base" parent="." index="12" instance=ExtResource( 5 )]
 

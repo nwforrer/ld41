@@ -1,12 +1,13 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/Mob.gd" type="Script" id=1]
-[ext_resource path="res://textures/mob.png" type="Texture" id=2]
+[ext_resource path="res://textures/Mob.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 30.7536
+radius = 19.9495
+height = 20.0
 
 [node name="Mob" type="PathFollow2D"]
 
@@ -36,6 +37,9 @@ _sections_unfolded = [ "Collision", "Pickable" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body" index="0"]
 
+position = Vector2( 1.73557, 0.15778 )
+rotation = 1.5708
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 

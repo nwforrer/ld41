@@ -11,9 +11,10 @@ var is_upgraded = false
 func _process(delta):
 	if can_fire and active_bodies.size() > 0:
 		var selected_mob = active_bodies[0]
-		var vector_to_mob = selected_mob.global_position - global_position
+		var vector_to_mob = (selected_mob.global_position - global_position).normalized()
+		
 		var projectile = load("res://scenes/Projectile.tscn").instance()
-		projectile.spawn(vector_to_mob.normalized())
+		projectile.spawn(vector_to_mob)
 		projectile.connect("projectile_hit", get_parent(), "on_projectile_hit")
 		add_child(projectile)
 		

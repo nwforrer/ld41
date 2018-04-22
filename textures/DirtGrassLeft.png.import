@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mob.png-e014a694387726c7f87293f71210a395.stex"
+path="res://.import/DirtGrassLeft.png-c13024ea49d352b8861972548a91dc8f.stex"
 
 [deps]
 
-source_file="res://textures/mob.png"
-source_md5="6028ee87c2972667bd86ba009feb8d57"
+source_file="res://textures/DirtGrassLeft.png"
+source_md5="ba62c1b445f1f28aa435ffdccf8d1b90"
 
-dest_files=[ "res://.import/mob.png-e014a694387726c7f87293f71210a395.stex" ]
-dest_md5="2a268e861494ff62e068b8cd932a0a20"
+dest_files=[ "res://.import/DirtGrassLeft.png-c13024ea49d352b8861972548a91dc8f.stex" ]
+dest_md5="d010f6d1e9f4861c9ab2856bf5aeecee"
 
 [params]
 

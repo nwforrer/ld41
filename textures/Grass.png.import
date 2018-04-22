@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/projectile.png-a8d8d522e1e033b1c4426199cf899879.stex"
+path="res://.import/Grass.png-4882ee70c464d824fba9c3aeffd15ee5.stex"
 
 [deps]
 
-source_file="res://textures/projectile.png"
-source_md5="0acab66003e1804f256a4b8f2fd8f57e"
+source_file="res://textures/Grass.png"
+source_md5="eb96ec3967d1a3e532bb4c7378b48c8d"
 
-dest_files=[ "res://.import/projectile.png-a8d8d522e1e033b1c4426199cf899879.stex" ]
-dest_md5="75231bd1944fb7b8675a364631a5f206"
+dest_files=[ "res://.import/Grass.png-4882ee70c464d824fba9c3aeffd15ee5.stex" ]
+dest_md5="ad89685dd391e5fe2274ad54defb5113"
 
 [params]
 

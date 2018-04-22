@@ -1,17 +1,19 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/Car.gd" type="Script" id=1]
-[ext_resource path="res://textures/car.png" type="Texture" id=2]
+[ext_resource path="res://textures/Car.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
-extents = Vector2( 30.2094, 14.9302 )
-
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 29.8076, 11.8881 )
+radius = 21.0666
+height = 16.6078
+
+[sub_resource type="CapsuleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 20.3673
+height = 18.7057
 
 [node name="Car" type="KinematicBody2D"]
 
@@ -30,10 +32,16 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
+visible = false
+position = Vector2( 1.92308, 3.8147e-06 )
+rotation = 1.5708
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="PickupArea" type="Area2D" parent="." index="2"]
 
+visible = false
+rotation = 1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -43,10 +51,11 @@ collision_layer = 4
 collision_mask = 34
 audio_bus_override = false
 audio_bus_name = "Master"
-_sections_unfolded = [ "Collision" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
 
+position = Vector2( 0.349648, -2.62237 )
 shape = SubResource( 2 )
 
 [connection signal="area_entered" from="PickupArea" to="." method="_on_Area2D_area_entered"]

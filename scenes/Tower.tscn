@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/Tower.gd" type="Script" id=1]
-[ext_resource path="res://textures/tower.png" type="Texture" id=2]
+[ext_resource path="res://textures/Tower.png" type="Texture" id=2]
 [ext_resource path="res://music/shoot.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -9,10 +9,10 @@
 custom_solver_bias = 0.0
 radius = 171.103
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 30.3568, 30.4134 )
+radius = 33.0534
 
 [node name="Tower" type="StaticBody2D"]
 

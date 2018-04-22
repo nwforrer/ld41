@@ -19,7 +19,9 @@ func _process(delta):
 	set_offset(get_offset() + (speed*delta))
 
 func projectile_hit():
-	get_node(str("MobHealthSprite",(health-1))).queue_free()
+	var health_sprite = get_node(str("MobHealthSprite",(health-1)))
+	if health_sprite:
+		health_sprite.queue_free()
 	health -= 1
 	if health == 0:
 		queue_free()
