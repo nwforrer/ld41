@@ -2,8 +2,18 @@ extends CanvasLayer
 
 var mob_boosts = []
 
+var winning = false
+
 func _ready():
 	set_resources_text(0, 0)
+	
+	$MobBoostsLabel/Health.hide()
+	$MobBoostsLabel/Speed.hide()
+	$MobBoostsLabel/Spawn.hide()
+	
+	$Spawning.hide()
+	$Winning.hide()
+	$Countdown.hide()
 
 func _on_Game_resources_updated(resources_collected, resources_needed):
 	set_resources_text(resources_collected, resources_needed)
@@ -12,23 +22,30 @@ func set_resources_text(resources_collected, resources_needed):
 	$ResourcesLabel.text = str("Resources ", resources_collected, " / ", resources_needed)
 	
 func add_mob_boost(boost):
-	var label = Label.new()
-	label.text = boost
-	
-	var prev
-	if mob_boosts.size() == 0:
-		prev = $MobBoostsLabel
-	else:
-		prev = mob_boosts.back()
-	label.rect_position = Vector2(prev.rect_position.x, prev.rect_position.y + prev.rect_size.y + 10)
-	
-	add_child(label)
-	mob_boosts.append(label)
+	if boost == 'health':
+		$MobBoostsLabel/Health.show()
+	elif boost == 'spawn':
+		$MobBoostsLabel/Spawn.show()
+	elif boost == 'speed':
+		$MobBoostsLabel/Speed.show()
 
-func countdown(time):
+func win_countdown(time):
+	winning = true
 	var display_time = round(time)
-	if display_time == 0:
-		$Countdown.hide()
+	$Winning.show()
+	$Countdown.text = str(display_time)
+	$Countdown.show()
+
+func countdown(time, spawning):
+	if winning:
+		$Spawning.hide()
 	else:
-		$Countdown.text = str(display_time)
-		$Countdown.show()
+		var display_time = round(time)
+		if display_time == 0:
+			$Countdown.hide()
+			$Spawning.hide()
+		else:
+			if spawning:
+				$Spawning.show()
+			$Countdown.text = str(display_time)
+			$Countdown.show()

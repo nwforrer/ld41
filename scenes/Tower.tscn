@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/Tower.gd" type="Script" id=1]
-[ext_resource path="res://textures/Tower.png" type="Texture" id=2]
-[ext_resource path="res://music/shoot.wav" type="AudioStream" id=3]
-[ext_resource path="res://textures/Arrow.png" type="Texture" id=4]
+[ext_resource path="res://textures/TowerBase.png" type="Texture" id=2]
+[ext_resource path="res://textures/Tower.png" type="Texture" id=3]
+[ext_resource path="res://music/shoot.wav" type="AudioStream" id=4]
+[ext_resource path="res://textures/Arrow.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -31,12 +32,17 @@ friction = 1.0
 bounce = 0.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision" ]
+is_built = true
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="Base" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 2 )
 
-[node name="FireRange" type="Area2D" parent="." index="1"]
+[node name="Tower" type="Sprite" parent="." index="1"]
+
+texture = ExtResource( 3 )
+
+[node name="FireRange" type="Area2D" parent="." index="2"]
 
 visible = false
 input_pickable = true
@@ -52,27 +58,27 @@ _sections_unfolded = [ "Collision" ]
 
 shape = SubResource( 1 )
 
-[node name="FireTimer" type="Timer" parent="." index="2"]
+[node name="FireTimer" type="Timer" parent="." index="3"]
 
 process_mode = 1
 wait_time = 2.0
 one_shot = false
 autostart = true
 
-[node name="Shot" type="AudioStreamPlayer" parent="." index="3"]
+[node name="Shot" type="AudioStreamPlayer" parent="." index="4"]
 
-stream = ExtResource( 3 )
+stream = ExtResource( 4 )
 volume_db = -17.27
 autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="5"]
 
 visible = false
 shape = SubResource( 2 )
 
-[node name="PlayerSelectRange" type="Area2D" parent="." index="5"]
+[node name="PlayerSelectRange" type="Area2D" parent="." index="6"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -89,10 +95,10 @@ _sections_unfolded = [ "Collision" ]
 
 shape = SubResource( 3 )
 
-[node name="ArrowSprite" type="Sprite" parent="." index="6"]
+[node name="ArrowSprite" type="Sprite" parent="." index="7"]
 
 position = Vector2( 0, -44.0939 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 _sections_unfolded = [ "Visibility" ]
 
 [connection signal="body_entered" from="FireRange" to="." method="_on_Area2D_body_entered"]

@@ -36,7 +36,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 358.784, 45.3767, 0, 0, 0, 0, 466.263, 158.396, 0, 0, 0, 0, 788.701, 449.809, 0, 0, 0, 0, 861.12, 486.746 )
 }
 
-[node name="Game" type="Node" index="0"]
+[node name="Game" type="Node"]
 
 script = ExtResource( 1 )
 paths = [ NodePath("bottom path"), NodePath("middle path"), NodePath("top path") ]
@@ -44,7 +44,9 @@ mob_health_boost = 4
 mob_speed_boost = 75
 mob_spawn_boost = 2
 resources_to_spawn = 3
+resources_held = 0
 resources_needed = 5
+resources_needed_increase = 0
 
 [node name="MobSpawnTimer" type="Timer" parent="." index="0"]
 
@@ -67,52 +69,61 @@ wait_time = 10.0
 one_shot = true
 autostart = false
 
-[node name="DefenseTileMap" parent="." index="3" instance=ExtResource( 2 )]
+[node name="WinCountdown" type="Timer" parent="." index="3"]
 
-[node name="RaceTrack" parent="." index="4" instance=ExtResource( 3 )]
+process_mode = 1
+wait_time = 5.0
+one_shot = true
+autostart = false
+
+[node name="DefenseTileMap" parent="." index="4" instance=ExtResource( 2 )]
+
+[node name="RaceTrack" parent="." index="5" instance=ExtResource( 3 )]
 
 position = Vector2( 1022.32, 109.009 )
 
-[node name="bottom path" type="Path2D" parent="." index="5"]
+[node name="bottom path" type="Path2D" parent="." index="6"]
 
 position = Vector2( -76.0795, -90.7123 )
 scale = Vector2( 1.0873, 1.16568 )
 curve = SubResource( 1 )
 
-[node name="middle path" type="Path2D" parent="." index="6"]
+[node name="middle path" type="Path2D" parent="." index="7"]
 
 position = Vector2( -76.8747, -113.211 )
 scale = Vector2( 1.0976, 1.22019 )
 curve = SubResource( 2 )
 
-[node name="top path" type="Path2D" parent="." index="7"]
+[node name="top path" type="Path2D" parent="." index="8"]
 
 position = Vector2( -138.556, -110.207 )
 scale = Vector2( 1.15542, 1.22423 )
 curve = SubResource( 3 )
 
-[node name="Tower" parent="." index="8" instance=ExtResource( 4 )]
+[node name="Tower" parent="." index="9" instance=ExtResource( 4 )]
 
 position = Vector2( 320.212, 443.202 )
 
-[node name="Tower2" parent="." index="9" instance=ExtResource( 4 )]
+[node name="Tower2" parent="." index="10" instance=ExtResource( 4 )]
 
 position = Vector2( 164.484, 304.275 )
+is_built = false
 
-[node name="Tower3" parent="." index="10" instance=ExtResource( 4 )]
+[node name="Tower3" parent="." index="11" instance=ExtResource( 4 )]
 
 position = Vector2( 333.523, 107.47 )
+is_built = false
 
-[node name="Tower4" parent="." index="11" instance=ExtResource( 4 )]
+[node name="Tower4" parent="." index="12" instance=ExtResource( 4 )]
 
 position = Vector2( 509.5, 277.199 )
 
-[node name="Base" parent="." index="12" instance=ExtResource( 5 )]
+[node name="Base" parent="." index="13" instance=ExtResource( 5 )]
 
 position = Vector2( 858.387, 494.866 )
 health = 2
 
-[node name="Car" parent="." index="13" instance=ExtResource( 6 )]
+[node name="Car" parent="." index="14" instance=ExtResource( 6 )]
 
 position = Vector2( 971.712, 284.045 )
 rotation_speed = 7.0
@@ -144,7 +155,7 @@ editor_draw_drag_margin = false
 script = ExtResource( 7 )
 _sections_unfolded = [ "Editor", "Limit" ]
 
-[node name="Music" type="AudioStreamPlayer" parent="." index="14"]
+[node name="Music" type="AudioStreamPlayer" parent="." index="15"]
 
 stream = ExtResource( 8 )
 volume_db = -17.27
@@ -153,7 +164,7 @@ mix_target = 0
 bus = "Master"
 script = ExtResource( 9 )
 
-[node name="ProjectileHit" type="AudioStreamPlayer" parent="." index="15"]
+[node name="ProjectileHit" type="AudioStreamPlayer" parent="." index="16"]
 
 stream = ExtResource( 10 )
 volume_db = -12.32
@@ -161,7 +172,7 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="ResourcePickup" type="AudioStreamPlayer" parent="." index="16"]
+[node name="ResourcePickup" type="AudioStreamPlayer" parent="." index="17"]
 
 stream = ExtResource( 11 )
 volume_db = -15.62
@@ -169,7 +180,7 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="Missed" type="AudioStreamPlayer" parent="." index="17"]
+[node name="Missed" type="AudioStreamPlayer" parent="." index="18"]
 
 stream = ExtResource( 12 )
 volume_db = -10.67
@@ -177,7 +188,7 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="Powerup" type="AudioStreamPlayer" parent="." index="18"]
+[node name="Powerup" type="AudioStreamPlayer" parent="." index="19"]
 
 stream = ExtResource( 13 )
 volume_db = -15.62
@@ -185,7 +196,7 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="GUI" parent="." index="19" instance=ExtResource( 14 )]
+[node name="GUI" parent="." index="20" instance=ExtResource( 14 )]
 
 [connection signal="resources_updated" from="." to="GUI" method="_on_Game_resources_updated"]
 
@@ -194,6 +205,8 @@ bus = "Master"
 [connection signal="timeout" from="RaceStartTimer" to="." method="_on_RaceStartTimer_timeout"]
 
 [connection signal="timeout" from="RaceStopTimer" to="." method="_on_RaceStopTimer_timeout"]
+
+[connection signal="timeout" from="WinCountdown" to="." method="_on_WinCountdown_timeout"]
 
 [connection signal="tower_selected" from="Tower" to="." method="_on_tower_selected"]
 

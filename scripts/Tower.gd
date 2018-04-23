@@ -3,6 +3,8 @@ extends StaticBody2D
 signal tower_selected
 signal tower_unselected
 
+export (bool) var is_built = true
+
 const MOB_BIT = 1
 const PLAYER_BIT = 4
 
@@ -12,10 +14,17 @@ var is_upgraded = false
 var is_highlighted = false
 
 func _ready():
+	if is_built:
+		$Base.hide()
+		$Tower.show()
+	else:
+		$Base.show()
+		$Tower.hide()
+		
 	$ArrowSprite.hide()
 
 func _process(delta):
-	if can_fire and active_bodies.size() > 0:
+	if is_built and can_fire and active_bodies.size() > 0:
 		var selected_mob = active_bodies[0]
 		var vector_to_mob = (selected_mob.global_position - global_position).normalized()
 		
@@ -30,7 +39,13 @@ func _process(delta):
 		can_fire = false
 
 func upgrade():
-	if not is_upgraded:
+	print('upgrading..isbuilt:', is_built, ' isupgraded:', is_upgraded)
+	if not is_built:
+		$Base.hide()
+		$Tower.show()
+		is_built = true
+		return true
+	elif not is_upgraded:
 		$FireTimer.wait_time = 1
 		is_upgraded = true
 		spawn_upgrade_sprite()
@@ -41,7 +56,7 @@ func spawn_upgrade_sprite():
 	var health_texture = load('res://textures/health.png')
 	var health_sprite = Sprite.new()
 	health_sprite.texture = health_texture
-	health_sprite.position.y = -$Sprite.texture.get_height()/2 - 5 - (2*health_texture.get_height())
+	health_sprite.position.y = -$Tower.texture.get_height()/2 - 5 - (2*health_texture.get_height())
 	health_sprite.name = str(get_name(), "HealthSprite")
 	add_child(health_sprite)
 
